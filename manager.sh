@@ -54,9 +54,10 @@
 			res=$(docker ps --format "{{.Names}}: {{.Image}}" | grep apache | awk '{print $1}' |sed 's/://'| sort -g |  sed '/$/a Off')
 			choice=$(whiptail --noitem --title "Container manager" --checklist "Choose containers to remove." 20 78 10 $res 3>&1 1>&2 2>&3)
 			chosen=$(echo $choice | sed 's/"//g' | sed 's/ /\n/g')
+
 			for i in ${chosen}; do
-				docker stop $i && docker rm $i
-			done
+                              docker stop $i && docker rm $i
+                        done
 		fi
             ;;
             Nginx)
