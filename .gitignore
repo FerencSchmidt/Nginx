@@ -1,0 +1,9 @@
+.vagrant
+bootstrap.sh
+tomcatstartup.sh
+app/Apachedocker/*
+app/Docker/*
+app/Master/*
+app/Slave/*
+app/Tomcat/*
+app/TomcatWorker/*
