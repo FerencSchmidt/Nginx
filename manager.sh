@@ -1,17 +1,17 @@
 #! /bin/bash
     status="0"
-    while [ "$status" -eq 0 ]  
+    while [ "$status" -eq 0 ]
     do
         choice=$(whiptail --title "Container manager" --menu "Choose" 16 78 5 \
         "Apache" "" \
         "Nginx" "" \
-	"Exit" "" 3>&2 2>&1 1>&3) 
+	"Exit" "" 3>&2 2>&1 1>&3)
 
         option=$(echo $choice)
         case "${option}" in
             Apache)
 
-		if (whiptail --title "Create new apache2 worker" --yes-button "New Apache" --no-button "Delete containers" --yesno "If you want to create a new apache2 container, you are in luck!" 10 78) then
+		if (whiptail --title "Create new apache2 worker" --yes-button "New Apache" --no-button "Delete containers" --yesno "Create container , (List AND/OR Delete!" 10 78) then
 
 		        CNAME=$(whiptail --title "Create new apache2 container" --inputbox "Enter the name of the container" 10 60 NAME goes here 3>&1 1>&2 2>&3)
 		        exitstatus=$?
@@ -64,12 +64,12 @@
                 whiptail --title "Container manager" --msgbox "You chose Nginx" 8 78
 
 		status2="0"
-		while [ "$status2" -eq 0 ]  
+		while [ "$status2" -eq 0 ]
 		do
         		choice=$(whiptail --title "Testing" --menu "Make a choice" 16 78 5 \
 	        	"1" "Start Nginx server." \
         		"2" "Restart Nginx server." \
-			"3" "Stop Nginx server." 3>&2 2>&1 1>&3) 
+			"3" "Stop Nginx server." 3>&2 2>&1 1>&3)
 	        	option=$(echo $choice)
         		case "${option}" in
             			1)
@@ -77,8 +77,7 @@
                 			whiptail --title "Container manager" --msgbox "Starting Nginx server with name: nginx" 8 78
 	            		;;
         	    		2)
-					docker stop nginx
-					docker start nginx
+					docker restart nginx
                 			whiptail --title "Container manager" --msgbox "Restarting Nginx server" 8 78
 				;;
 				3)
@@ -99,6 +98,6 @@
             ;;
         esac
         exitstatus1=$status1
-	
     done
+
 
